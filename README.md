@@ -104,5 +104,5 @@ MIT License – Feel free to use, modify, and share!
 
 ## 🙌 Acknowledgments
 
-- [MNIST Dataset](http://yann.lecun.com/exdb/mnist/)
+- [MNIST Dataset](https://www.kaggle.com/datasets/hojjatk/mnist-dataset)
 - TensorFlow/Keras tutorials
