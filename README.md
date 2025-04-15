@@ -70,9 +70,9 @@ Use your mouse to draw digits, press **Predict**, and the model will recognize t
 
 ## 📷 Screenshots
 
-| Drawing Canvas        | Prediction Output         |
-|-----------------------|---------------------------|
-| ![Canvas]() | ![Model]() |
+|     Prediction Canvas      |       Model Arhitecture     |
+|----------------------------|-----------------------------|
+| ![Canvas](https://github.com/0dayradw/AI-Digit-Recognizer/blob/main/images/Screenshot%20(482).png) | ![Model](https://github.com/0dayradw/AI-Digit-Recognizer/blob/main/images/model_visualization.png) |
 
 ---
 
