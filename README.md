@@ -10,8 +10,7 @@ An interactive Pygame app that recognizes digits drawn by hand using a Convoluti
 digit_rec/
 ├── Lib/
 │   ├── predict_game2.py         # Main game interface
-│   ├── constants.py             # UI constants (colors, sizes, etc.)
-│   └── utils.py (optional)      # Utility functions
+│   └── constants.py             # UI constants (colors, sizes, etc.)
 ├── model/
 │   └── digit_model.keras        # Trained CNN model
 ├── images/
@@ -30,8 +29,8 @@ digit_rec/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/digit_rec.git
-cd digit_rec
+git clone https://github.com/0dayradw/AI-Digit-Recognizer
+cd AI-Digit-Recognizer
 ```
 
 ### 2. Create Virtual Environment
@@ -73,7 +72,7 @@ Use your mouse to draw digits, press **Predict**, and the model will recognize t
 
 | Drawing Canvas        | Prediction Output         |
 |-----------------------|---------------------------|
-| ![Canvas](images/sample_prediction.png) | ![Model](images/architecture.png) |
+| ![Canvas]() | ![Model]() |
 
 ---
 
