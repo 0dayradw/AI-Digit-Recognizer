@@ -33,7 +33,7 @@ def run_prediction_app():
         plt.show()
 
     # After drawing we save as a photo and give it to the model for prediction
-    def save_canvas(surface, file_path="images/test_canvas.png"):
+    def save_canvas(surface, file_path="images/canvas.png"):
         arr = pygame.surfarray.array3d(surface)
         arr = np.transpose(arr, (1, 0, 2))
         gray = cv2.cvtColor(arr, cv2.COLOR_RGB2GRAY)
@@ -44,7 +44,7 @@ def run_prediction_app():
 
     # Function to predict on an image given
     def predict_digit():
-        img = cv2.imread('images/test_canvas.png', cv2.IMREAD_GRAYSCALE)
+        img = cv2.imread('images/canvas.png', cv2.IMREAD_GRAYSCALE)
         img = cv2.resize(img, (64, 64))
 
         arr = img.astype(np.float32) / 255.0
