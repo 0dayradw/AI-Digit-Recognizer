@@ -1,7 +1,7 @@
 # ✏️ Handwritten Digit Recognition with CNN
 
 An interactive Pygame app that recognizes digits drawn by hand using a Convolutional Neural Network (CNN) trained on the MNIST dataset.
-
+Also this is my final year school project, that i presented in front of my teachers and secure a 10. )))
 ---
 
 ## 📁 Project Structure
@@ -12,19 +12,22 @@ digit_rec/
 │   ├── predict_game2.py         # Main game interface
 │   └── constants.py             # UI constants (colors, sizes, etc.)
 ├── model/
-│   └── digit_model.keras        # Trained CNN model
+│   ├── digit_model.keras        # Trained CNN model
+|   └── train_model.py           # Training script for the model
 ├── images/
+|   ├── FirstTest.png            # Use of app
+|   ├── SecondTest.png           # Use of app
 │   ├── architecture.png         # Model architecture
 │   └── sample_prediction.png    # Example prediction
-├── train_model.py               # Training script
 ├── main.py                      # Entry point
 ├── requirements.txt             # Dependencies
+├── LICENSE                      # MIT license
 └── README.md                    # This file
 ```
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### 1. Clone the Repository
 
