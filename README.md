@@ -32,7 +32,7 @@ digit_rec/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/0dayradw/AI-Digit-Recognizer
+git clone https://github.com/RadwB2112/AI-Digit-Recognizer
 cd AI-Digit-Recognizer
 ```
 
