@@ -1,6 +1,6 @@
 # ✏️ Handwritten Digit Recognition with CNN
 
-An interactive Pygame app that recognizes digits drawn by hand using a Convolutional Neural Network (CNN) trained on the MNIST dataset.
+An interactive Pygame app that recognizes digits drawn by hand using a Convolutional Neural Network (CNN) trained on the MNIST dataset.  
 Also this is my final year school project, that i presented in front of my teachers and secure a 10. )))
 ---
 
@@ -75,7 +75,7 @@ Use your mouse to draw digits, press **Predict**, and the model will recognize t
 
 |     Prediction Canvas      |       Model Arhitecture     |
 |----------------------------|-----------------------------|
-| ![Canvas](https://github.com/0dayradw/AI-Digit-Recognizer/blob/main/images/Screenshot%20(482).png) | ![Model](https://github.com/0dayradw/AI-Digit-Recognizer/blob/main/images/model_visualization.png) |
+| ![Canvas](https://github.com/0dayradw/AI-Digit-Recognizer/blob/main/images/FirstTest.png)  | ![Model](https://github.com/0dayradw/AI-Digit-Recognizer/blob/main/images/model_visualization.png) |
 
 ---
 
