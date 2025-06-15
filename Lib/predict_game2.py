@@ -11,17 +11,17 @@ def run_prediction_app():
 
     pygame.init()
 
-    # Fereastra principală
+    # Main window
     screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
     pygame.display.set_caption("NumPredict")
 
-    # Zona de desen
+    # images area 
     drawing_surface_rect = pygame.Rect(DRAW_AREA_LEFT, DRAW_AREA_TOP, DRAW_AREA_WIDTH, DRAW_AREA_WIDTH)
     drawing_surface = pygame.Surface((CANVAS_SIZE, CANVAS_SIZE))
     drawing_surface.fill(WHITE)
 
 
-    # Afișează una sau mai multe imagini (pentru testare sau vizualizare)
+    # Helper function to see multiple images
     def show_image(images):
         fig, axes = plt.subplots(1, len(images), figsize=(5 * len(images), 5))
 
@@ -32,8 +32,7 @@ def run_prediction_app():
 
         plt.show()
 
-    # Salvează conținutul zonei de desen ca imagine alb-negru
-
+    # After drawing we save as a photo and give it to the model for prediction
     def save_canvas(surface, file_path="images/test_canvas.png"):
         arr = pygame.surfarray.array3d(surface)
         arr = np.transpose(arr, (1, 0, 2))
@@ -43,15 +42,12 @@ def run_prediction_app():
         cv2.imwrite(file_path, binary_img)
 
 
-    # Prezice cifra desenată pe ecran
+    # Function to predict on an image given
     def predict_digit():
         img = cv2.imread('images/test_canvas.png', cv2.IMREAD_GRAYSCALE)
         img = cv2.resize(img, (64, 64))
 
-        # Convertește imaginea într-un array numpy și o normalizează în intervalul [0, 1]
         arr = img.astype(np.float32) / 255.0
-
-        # Redimensionează array-ul pentru a adăuga dimensiuni pentru batch și canal
         arr = arr.reshape(1, 64, 64, 1)
 
         prediction = model.predict(arr)
@@ -61,18 +57,18 @@ def run_prediction_app():
         return digit, confidence
 
 
-    # Desenează butoanele "Predict" și "Clear"
+    # Funtion for drawing the buttons
     def draw_buttons():
         font = pygame.font.Font(None, 50)
 
-        # Butonul de predicție
+        # Prediction button
         predict_rect = pygame.Rect(BUTTON_X, BUTTON_Y, BUTTON_WIDTH, BUTTON_HEIGHT)
         pygame.draw.rect(screen, BLUE, predict_rect, border_radius=15)
         pygame.draw.rect(screen, LIGHT_BLUE, predict_rect, 4, border_radius=15)
         predict_text = font.render("Predict", True, WHITE)
         screen.blit(predict_text, predict_text.get_rect(center=predict_rect.center))
 
-        # Butonul de ștergere
+        # Clear button 
         clear_rect = pygame.Rect(BUTTON_X, BUTTON_Y + BUTTON_HEIGHT + 30, BUTTON_WIDTH, BUTTON_HEIGHT)
         pygame.draw.rect(screen, BLUE, clear_rect, border_radius=15)
         pygame.draw.rect(screen, LIGHT_BLUE, clear_rect, 4, border_radius=15)
@@ -82,7 +78,7 @@ def run_prediction_app():
         return predict_rect, clear_rect
 
 
-    # Afișează cifra prezisă și nivelul de încredere
+    # We output the predicted digit
     def display_prediction(digit, confidence):
         font = pygame.font.Font(None, 50)
         text_lines = [
@@ -96,7 +92,6 @@ def run_prediction_app():
         pygame.draw.rect(screen, BLUE, prediction_box, border_radius=15)
         pygame.draw.rect(screen, LIGHT_BLUE, prediction_box, 4, border_radius=15)
 
-        # Afișăm textul în interiorul casetei de predicție
         y_offset = prediction_box.y + 10
         for line in text_lines:
             text_surface = font.render(line, True, WHITE)
@@ -105,27 +100,27 @@ def run_prediction_app():
             y_offset += 40
 
 
-    # Funcția care desenează tot ce apare pe ecran
+    # function to draw everything on screen
     def draw():
-        # Titlul aplicației
+        # app title
         def draw_title():
             font = pygame.font.Font(None, 36)
-            title_text = font.render("Handwritten Digit Recognizer", True, WHITE) # Recunoasterea Cifrelor cu Inteligenta Artificiala
+            title_text = font.render("Handwritten Digit Recognizer", True, WHITE)
             screen.blit(title_text, (WINDOW_WIDTH // 2 - title_text.get_width() // 2, 20))
 
-        # Fundalul cu gradient albastru
+        # background with a dark blue gradient 
         def draw_gradient_background():
             for i in range(WINDOW_HEIGHT):
                 color = (0, 0, int(255 * (i / WINDOW_HEIGHT)))  # Blue gradient
                 pygame.draw.line(screen, color, (0, i), (WINDOW_WIDTH, i))
 
-        # Cursorul personalizat (un cerc mic negru)
+        # personalized cursor
         def draw_cursor():
             x, y = pygame.mouse.get_pos()
             if y < WINDOW_HEIGHT:
                 pygame.draw.circle(screen, BLACK, (x, y), 5)
 
-        # Zona de desen cu colțuri rotunjite și imagine scalată
+        # Drawing area 
         def draw_rounded_drawing_surface():
             rounded_surface = pygame.Surface((DRAW_AREA_WIDTH, DRAW_AREA_WIDTH), pygame.SRCALPHA)
             pygame.draw.rect(rounded_surface, WHITE, (0, 0, DRAW_AREA_WIDTH, DRAW_AREA_WIDTH), border_radius=20)
@@ -140,8 +135,6 @@ def run_prediction_app():
         draw_title()
         draw_cursor()
 
-
-    # Bucla principală a aplicației
     running = True
     predicted_digit, confidence = None, None
 
@@ -149,10 +142,10 @@ def run_prediction_app():
         screen.fill(GRAY)
         draw()
 
-        # Desenăm butoanele
+        # We draw the buttons on screen
         predict_button, clear_button = draw_buttons()
 
-        # Dacă există o predicție, o afișăm pe ecran
+        # If there is a prediction we show it 
         if predicted_digit is not None and confidence is not None:
             display_prediction(predicted_digit, confidence)
 
@@ -161,13 +154,12 @@ def run_prediction_app():
                 running = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if predict_button.collidepoint(event.pos):
-                    save_canvas(drawing_surface)                     # Salvăm desenul ca imagine
-                    predicted_digit, confidence = predict_digit()    # Prezicem cifra
+                    save_canvas(drawing_surface)                     # we save the canvas 
+                    predicted_digit, confidence = predict_digit()    # and we predict on it
                 elif clear_button.collidepoint(event.pos):
-                    drawing_surface.fill(WHITE)                     # Curățăm desenul
+                    drawing_surface.fill(WHITE)                    
                     predicted_digit, confidence = None, None
 
-            # Desenăm atunci când apăsăm click și mișcăm mouse-ul
             elif event.type == pygame.MOUSEMOTION and event.buttons[0]:
                 x, y = pygame.mouse.get_pos()
                 if drawing_surface_rect.collidepoint(x, y):
@@ -180,7 +172,3 @@ def run_prediction_app():
         pygame.display.flip()
 
     pygame.quit()
-
-
-
-# https://colab.research.google.com/github/d2l-ai/d2l-en-colab/blob/master/chapter_appendix-tools-for-deep-learning/jupyter.ipynb#scrollTo=uK1I7NrqPdSl
